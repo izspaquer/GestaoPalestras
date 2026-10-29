@@ -1,3 +1,3 @@
-# PeleNegra
+# GestaoPalestras
 
 gabriela + heloisa
