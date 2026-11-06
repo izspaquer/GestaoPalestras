@@ -1,3 +1,3 @@
 # GestaoPalestras
 
-gabriela + heloisa
+Gabriela + Heloisa
