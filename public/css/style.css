@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #4b2e83;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.inicio {
+    text-align: center;
+    background-color: white;
+    padding: 50px 20px;
+    border-radius: 10px;
+}
+
+.inicio h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.inicio p {
+    margin-bottom: 25px;
+}
+
+.botao {
+    display: inline-block;
+    background-color: #4b2e83;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+}
+
+.botao:hover {
+    background-color: #372160;
+}
+
+.sobre {
+    margin-top: 30px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.sobre h2 {
+    margin-bottom: 15px;
+}
+
+.lista-palestras {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.palestra {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.palestra h3 {
+    color: #4b2e83;
+    margin-bottom: 15px;
+}
+
+.palestra p {
+    margin-bottom: 8px;
+}
