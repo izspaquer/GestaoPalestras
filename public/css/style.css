@@ -6,49 +6,92 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f5f3f9;
     color: #333;
+    line-height: 1.6;
 }
 
 header {
     background-color: #4b2e83;
     color: white;
-    padding: 20px;
+    padding: 22px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+header h1 {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    margin-left: 15px;
+    font-size: 15px;
+    transition: 0.3s;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: #d8c8f5;
+    text-decoration: none;
 }
 
 main {
-    max-width: 900px;
-    margin: auto;
-    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px 25px;
+}
+
+main > h2 {
+    color: #4b2e83;
+    margin-bottom: 20px;
+    font-size: 28px;
 }
 
 .inicio {
     text-align: center;
     background-color: white;
-    padding: 50px 20px;
-    border-radius: 10px;
+    padding: 65px 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(75, 46, 131, 0.07);
 }
 
 .inicio h2 {
-    font-size: 32px;
+    color: #4b2e83;
+    font-size: 34px;
     margin-bottom: 15px;
 }
 
 .inicio p {
-    margin-bottom: 25px;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.sobre {
+    margin-top: 30px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(75, 46, 131, 0.06);
+}
+
+.sobre h2 {
+    color: #4b2e83;
+    margin-bottom: 12px;
+}
+
+.sobre p {
+    color: #666;
 }
 
 .botao {
@@ -56,45 +99,146 @@ main {
     background-color: #4b2e83;
     color: white;
     text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 5px;
+    border: none;
+    padding: 13px 25px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .botao:hover {
     background-color: #372160;
-}
-
-.sobre {
-    margin-top: 30px;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-}
-
-.sobre h2 {
-    margin-bottom: 15px;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(75, 46, 131, 0.2);
 }
 
 .lista-palestras {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     margin-top: 25px;
     flex-wrap: wrap;
 }
 
 .palestra {
     background-color: white;
-    padding: 25px;
-    border-radius: 10px;
+    padding: 28px;
+    border-radius: 12px;
     width: 300px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee8f7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
+
+.palestra:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 7px 18px rgba(75, 46, 131, 0.12);
 }
 
 .palestra h3 {
     color: #4b2e83;
-    margin-bottom: 15px;
+    font-size: 19px;
+    margin-bottom: 18px;
 }
 
 .palestra p {
-    margin-bottom: 8px;
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.login {
+    background-color: white;
+    max-width: 450px;
+    margin: 20px auto;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(75, 46, 131, 0.09);
+}
+
+.login h2 {
+    color: #4b2e83;
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 28px;
+}
+
+.login form div {
+    margin-bottom: 20px;
+}
+
+.login label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #444;
+}
+
+.login input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.login input:focus {
+    border-color: #4b2e83;
+    box-shadow: 0 0 0 3px rgba(75, 46, 131, 0.1);
+}
+
+.login button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.erro {
+    background-color: #fff0f0;
+    color: #c0392b;
+    padding: 12px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid #f5cccc;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    main {
+        padding: 30px 15px;
+    }
+
+    .inicio {
+        padding: 45px 20px;
+    }
+
+    .inicio h2 {
+        font-size: 27px;
+    }
+
+    .lista-palestras {
+        flex-direction: column;
+    }
+
+    .palestra {
+        width: 100%;
+    }
+
+    .login {
+        padding: 28px 22px;
+    }
 }
