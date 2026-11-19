@@ -6,15 +6,17 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f3f9;
+    background-color: #f4f7f5;
     color: #333;
     line-height: 1.6;
 }
 
+/* Cabeçalho */
+
 header {
-    background-color: #4b2e83;
+    background-color: #245c45;
     color: white;
-    padding: 22px 5%;
+    padding: 20px 8%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,128 +27,134 @@ header {
 
 header h1 {
     font-size: 25px;
-    font-weight: 700;
 }
 
 nav {
     display: flex;
-    gap: 25px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    font-size: 15px;
+    font-weight: bold;
     transition: 0.3s;
 }
 
 nav a:hover {
-    color: #d8c8f5;
-    text-decoration: none;
+    color: #b8e5c9;
 }
+
+/* Conteúdo principal */
 
 main {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 50px 25px;
+    width: 85%;
+    max-width: 1100px;
+    margin: 40px auto;
 }
 
-main > h2 {
-    color: #4b2e83;
+h2 {
+    color: #245c45;
     margin-bottom: 20px;
-    font-size: 28px;
 }
+
+/* Início */
 
 .inicio {
-    text-align: center;
     background-color: white;
+    text-align: center;
     padding: 65px 25px;
-    border-radius: 14px;
-    box-shadow: 0 4px 15px rgba(75, 46, 131, 0.07);
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
 }
 
 .inicio h2 {
-    color: #4b2e83;
-    font-size: 34px;
+    font-size: 30px;
     margin-bottom: 15px;
 }
 
 .inicio p {
     color: #666;
-    margin-bottom: 30px;
-    font-size: 16px;
+    margin-bottom: 25px;
 }
 
 .sobre {
-    margin-top: 30px;
     background-color: white;
-    padding: 30px;
-    border-radius: 14px;
-    box-shadow: 0 4px 15px rgba(75, 46, 131, 0.06);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }
 
 .sobre h2 {
-    color: #4b2e83;
     margin-bottom: 12px;
 }
 
-.sobre p {
-    color: #666;
-}
+/* Botões */
 
+button,
 .botao {
-    display: inline-block;
-    background-color: #4b2e83;
+    background-color: #327957;
     color: white;
-    text-decoration: none;
     border: none;
-    padding: 13px 25px;
-    border-radius: 7px;
-    font-size: 15px;
-    font-weight: bold;
+    padding: 11px 20px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-block;
     transition: 0.3s;
 }
 
+button:hover,
 .botao:hover {
-    background-color: #372160;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(75, 46, 131, 0.2);
+    background-color: #245c45;
 }
 
-.lista-palestras {
-    display: flex;
-    gap: 25px;
-    margin-top: 25px;
-    flex-wrap: wrap;
-}
+/* Formulários */
 
-.palestra {
+form {
     background-color: white;
-    padding: 28px;
-    border-radius: 12px;
-    width: 300px;
-    border: 1px solid #eee8f7;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: 0.3s;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }
 
-.palestra:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 7px 18px rgba(75, 46, 131, 0.12);
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
 }
 
-.palestra h3 {
-    color: #4b2e83;
-    font-size: 19px;
-    margin-bottom: 18px;
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
 }
 
-.palestra p {
-    color: #666;
-    margin-bottom: 10px;
-    font-size: 14px;
+textarea {
+    min-height: 100px;
+    resize: vertical;
 }
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #327957;
+}
+
+/* Login */
 
 .login {
     background-color: white;
@@ -154,46 +162,41 @@ main > h2 {
     margin: 20px auto;
     padding: 40px;
     border-radius: 14px;
-    box-shadow: 0 4px 18px rgba(75, 46, 131, 0.09);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
 }
 
 .login h2 {
-    color: #4b2e83;
     text-align: center;
     font-size: 27px;
     margin-bottom: 28px;
 }
 
-.login form div {
-    margin-bottom: 20px;
+.login form {
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
 }
 
 .login label {
-    display: block;
-    margin-bottom: 7px;
-    font-weight: bold;
-    font-size: 14px;
-    color: #444;
+    margin-top: 15px;
 }
 
 .login input {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 7px;
-    font-size: 15px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.login input:focus {
-    border-color: #4b2e83;
-    box-shadow: 0 0 0 3px rgba(75, 46, 131, 0.1);
+    margin-bottom: 10px;
 }
 
 .login button {
     width: 100%;
-    margin-top: 8px;
+    margin-top: 15px;
+}
+
+.login > p {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login a {
+    color: #327957;
 }
 
 .erro {
@@ -203,10 +206,160 @@ main > h2 {
     border-radius: 7px;
     margin-bottom: 20px;
     font-size: 14px;
-    border: 1px solid #f5cccc;
 }
 
+.sucesso {
+    background-color: #e4f0e8;
+    color: #245c45;
+    padding: 12px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+}
+
+/* Cartões de palestras */
+
+.lista-palestras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.palestra {
+    background-color: white;
+    padding: 22px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
+
+.palestra:hover {
+    transform: translateY(-3px);
+}
+
+.palestra h3 {
+    color: #245c45;
+    margin-bottom: 10px;
+}
+
+.palestra p {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.palestra form {
+    padding: 0;
+    margin-top: 12px;
+    box-shadow: none;
+}
+
+.palestra a {
+    text-decoration: none;
+}
+
+/* Painel administrativo */
+
+section {
+    margin-bottom: 35px;
+}
+
+.painel {
+    max-width: 1100px;
+}
+
+.boas-vindas {
+    background-color: #e4f0e8;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 35px;
+}
+
+.boas-vindas h2 {
+    margin-bottom: 8px;
+}
+
+.boas-vindas p {
+    color: #52675a;
+}
+
+.admin-secao {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.admin-secao h2 {
+    border-bottom: 2px solid #e4f0e8;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.grade-cartoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.cartao-admin {
+    background-color: #f7faf8;
+    border: 1px solid #e1eae3;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.cartao-admin h3 {
+    color: #245c45;
+    margin-bottom: 12px;
+}
+
+.cartao-admin p {
+    margin-bottom: 8px;
+    overflow-wrap: anywhere;
+}
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.acoes a,
+.acoes button {
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    padding: 9px 16px;
+}
+
+.acoes .btn-editar {
+    background-color: #327957;
+    color: white;
+    border-radius: 6px;
+}
+
+.acoes .btn-excluir {
+    background-color: #b94242;
+}
+
+.acoes .btn-excluir:hover {
+    background-color: #923232;
+}
+
+.acoes form {
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* Responsividade */
+
 @media (max-width: 600px) {
+
     header {
         flex-direction: column;
         text-align: center;
@@ -214,31 +367,35 @@ main > h2 {
 
     nav {
         justify-content: center;
-        gap: 18px;
-        flex-wrap: wrap;
+        gap: 15px;
     }
 
     main {
-        padding: 30px 15px;
+        width: 92%;
+        margin: 25px auto;
     }
 
     .inicio {
-        padding: 45px 20px;
+        padding: 40px 18px;
     }
 
     .inicio h2 {
-        font-size: 27px;
-    }
-
-    .lista-palestras {
-        flex-direction: column;
-    }
-
-    .palestra {
-        width: 100%;
+        font-size: 24px;
     }
 
     .login {
         padding: 28px 22px;
+    }
+
+    .admin-secao {
+        padding: 18px;
+    }
+
+    .boas-vindas {
+        padding: 22px;
+    }
+
+    .grade-cartoes {
+        grid-template-columns: 1fr;
     }
 }

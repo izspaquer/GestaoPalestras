@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,34 +13,71 @@
 <body>
 
     <header>
-        <h1> Gestão de Palestras</h1>
+        <h1>Gestão de Palestras</h1>
 
         <nav>
-            <a href="/">Início</a>
-            <a href="/palestras">Palestras</a>
-            <a href="/login">Login</a>
-        </nav>
+    <a href="/">Início</a>
+    <a href="/palestras">Palestras</a>
+
+    <% if (usuario) { %>
+
+        <span>Olá, <%= usuario.nome %>!</span>
+
+        <a href="/logout">Sair</a>
+
+    <% } else { %>
+
+        <a href="/login">Login</a>
+
+    <% } %>
+</nav>
     </header>
 
     <main>
 
-        <h2> Palestras disponíveis</h2>
+        <h2>Palestras disponíveis</h2>
 
         <section class="lista-palestras">
 
-            <div class="palestra">
-                <h3>Introdução à Tecnologia</h3>
-                <p>Data: 20/11/2026</p>
-                <p>Horário: 14:00</p>
-                <p>Local: Auditório Principal</p>
-            </div>
+            <% if (palestras.length > 0) { %>
 
-            <div class="palestra">
-                <h3>Programação para Iniciantes</h3>
-                <p>Data: 25/11/2026</p>
-                <p>Horário: 16:00</p>
-                <p>Local: Sala de Informática</p>
-            </div>
+                <% palestras.forEach(palestra => { %>
+
+                    <div class="palestra">
+
+                        <h3><%= palestra.titulo_palestra %></h3>
+
+                        <p><%= palestra.descricao %></p>
+
+                        <p>Palestrante: <%= palestra.palestrante %></p>
+
+                        <p>Data: <%= palestra.data_formatada %></p>
+
+                        <p>Horário: <%= palestra.horario_formatado %></p>
+
+                        <p>Local: <%= palestra.nome_sala %></p>
+
+                        <% if (usuario) { %>
+
+                            <form action="/favoritos/<%= palestra.id %>" method="POST">
+
+                                <button type="submit">
+                                    <%= palestra.favorita ? '★ Remover dos favoritos' : '☆ Adicionar aos favoritos' %>
+                                </button>
+
+                            </form>
+
+                        <% } %>
+
+                    </div>
+
+                <% }) %>
+
+            <% } else { %>
+
+                <p>Nenhuma palestra cadastrada no momento.</p>
+
+            <% } %>
 
         </section>
 

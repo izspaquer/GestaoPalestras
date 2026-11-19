@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Palestra</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Gestão de Palestras</h1>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/palestras">Palestras</a>
+            <a href="/admin">Painel Administrativo</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Editar Palestra</h2>
+
+            <form action="/admin/palestras/editar/<%= palestra.id %>" method="POST">
+
+                <label>Título:</label>
+                <input
+                    type="text"
+                    name="titulo_palestra"
+                    value="<%= palestra.titulo_palestra %>"
+                    required
+                >
+
+                <label>Descrição:</label>
+                <textarea name="descricao" required><%= palestra.descricao %></textarea>
+
+                <label>Palestrante:</label>
+                <input
+                    type="text"
+                    name="palestrante"
+                    value="<%= palestra.palestrante %>"
+                    required
+                >
+
+                <label>Data e horário:</label>
+                <input
+                    type="datetime-local"
+                    name="data_hora"
+                    value="<%= palestra.data_hora_input %>"
+                    required
+                >
+
+                <label>Sala:</label>
+
+                <select name="id_sala" required>
+
+                    <% salas.forEach(sala => { %>
+
+                        <option
+                            value="<%= sala.id %>"
+                            <%= sala.id === palestra.id_sala ? 'selected' : '' %>
+                        >
+                            <%= sala.nome_sala %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+                <button type="submit">Salvar alterações</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

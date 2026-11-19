@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Gestão de Palestras</h1>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/palestras">Palestras</a>
+            <a href="/logout">Sair</a>
+        </nav>
+    </header>
+
+    <main class="painel">
+
+        <div class="boas-vindas">
+            <h2>Painel Administrativo</h2>
+            <p>Bem-vindo(a), <%= usuario.nome %>!</p>
+            <p>Gerencie as salas e palestras do sistema.</p>
+        </div>
+
+        <section class="admin-secao">
+
+            <h2>Cadastrar Sala</h2>
+
+            <form action="/admin/salas" method="POST">
+
+                <label>Nome da sala:</label>
+                <input type="text" name="nome_sala" required>
+
+                <label>Capacidade máxima:</label>
+                <input type="number" name="capacidade_maxima" min="1" required>
+
+                <label>Bloco:</label>
+                <input type="text" name="bloco" required>
+
+                <button type="submit">Cadastrar Sala</button>
+
+            </form>
+
+        </section>
+
+        <section class="admin-secao">
+
+            <h2>Salas cadastradas</h2>
+
+            <div class="grade-cartoes">
+
+                <% salas.forEach(sala => { %>
+
+                    <div class="cartao-admin">
+
+                        <h3><%= sala.nome_sala %></h3>
+
+                        <p>Capacidade: <%= sala.capacidade_maxima %> pessoas</p>
+
+                        <p>Bloco: <%= sala.bloco %></p>
+
+                    </div>
+
+                <% }) %>
+
+                <% if (salas.length === 0) { %>
+                    <p>Nenhuma sala cadastrada.</p>
+                <% } %>
+
+            </div>
+
+        </section>
+
+        <section class="admin-secao">
+
+            <h2>Cadastrar Palestra</h2>
+
+            <form action="/admin/palestras" method="POST">
+
+                <label>Título:</label>
+                <input type="text" name="titulo_palestra" required>
+
+                <label>Descrição:</label>
+                <textarea name="descricao" required></textarea>
+
+                <label>Palestrante:</label>
+                <input type="text" name="palestrante" required>
+
+                <label>Data e horário:</label>
+                <input type="datetime-local" name="data_hora" required>
+
+                <label>Sala:</label>
+
+                <select name="id_sala" required>
+                    <option value="">Selecione uma sala</option>
+
+                    <% salas.forEach(sala => { %>
+                        <option value="<%= sala.id %>">
+                            <%= sala.nome_sala %>
+                        </option>
+                    <% }) %>
+
+                </select>
+
+                <button type="submit">Cadastrar Palestra</button>
+
+            </form>
+
+        </section>
+
+        <section class="admin-secao">
+
+            <h2>Palestras cadastradas</h2>
+
+            <div class="grade-cartoes">
+
+                <% palestras.forEach(palestra => { %>
+
+                    <div class="cartao-admin">
+
+                        <h3><%= palestra.titulo_palestra %></h3>
+
+                        <p><%= palestra.descricao %></p>
+
+                        <p>Palestrante: <%= palestra.palestrante %></p>
+
+                        <p>Data: <%= new Date(palestra.data_hora).toLocaleString('pt-BR') %></p>
+
+                        <p>Sala: <%= palestra.nome_sala %></p>
+
+                        <div class="acoes">
+
+                            <a href="/admin/palestras/editar/<%= palestra.id %>" class="btn-editar">
+                                Editar
+                            </a>
+
+                            <form action="/admin/palestras/excluir/<%= palestra.id %>" method="POST"
+                                onsubmit="return confirm('Deseja realmente excluir esta palestra?');">
+
+                                <button type="submit" class="btn-excluir">
+                                    Excluir
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+                <% if (palestras.length === 0) { %>
+                    <p>Nenhuma palestra cadastrada.</p>
+                <% } %>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
