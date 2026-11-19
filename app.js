@@ -21,11 +21,9 @@ app.use(session({
     }
 }));
 
-
 app.get('/', (req, res) => {
     res.render('index');
 });
-
 
 app.get('/palestras', (req, res) => {
 
@@ -63,7 +61,6 @@ app.get('/palestras', (req, res) => {
     });
 
 });
-
 
 app.get('/login', (req, res) => {
     res.render('login', {
@@ -124,11 +121,8 @@ app.post('/login', (req, res) => {
             console.log(erro);
             res.send('Erro ao verificar a senha.');
         }
-
     });
-
 });
-
 
 function verificarAdmin(req, res, next) {
 
@@ -138,7 +132,6 @@ function verificarAdmin(req, res, next) {
 
     res.redirect('/login');
 }
-
 
 app.get('/admin', verificarAdmin, (req, res) => {
 
@@ -164,24 +157,18 @@ app.get('/admin', verificarAdmin, (req, res) => {
                 console.log(erro);
                 return res.send('Erro ao buscar palestras.');
             }
-
             res.render('admin', {
                 usuario: req.session.usuario,
                 salas: salas,
                 palestras: palestras
             });
-
         });
-
     });
-
 });
-
 
 app.post('/admin/salas', verificarAdmin, (req, res) => {
 
     const { nome_sala, capacidade_maxima, bloco } = req.body;
-
     const sql = `
         INSERT INTO salas (nome_sala, capacidade_maxima, bloco)
         VALUES (?, ?, ?)
@@ -196,17 +183,12 @@ app.post('/admin/salas', verificarAdmin, (req, res) => {
                 console.log(erro);
                 return res.send('Erro ao cadastrar sala.');
             }
-
             res.redirect('/admin');
-
         }
     );
-
 });
 
-
 app.post('/admin/palestras', verificarAdmin, (req, res) => {
-
     const {
         titulo_palestra,
         descricao,
@@ -216,13 +198,11 @@ app.post('/admin/palestras', verificarAdmin, (req, res) => {
     } = req.body;
 
     const dataFormatada = data_hora.replace('T', ' ') + ':00';
-
     const sql = `
         INSERT INTO palestras
         (titulo_palestra, descricao, palestrante, data_hora, id_sala, usuario_id)
         VALUES (?, ?, ?, ?, ?, ?)
     `;
-
     connection.query(
         sql,
         [
@@ -234,67 +214,48 @@ app.post('/admin/palestras', verificarAdmin, (req, res) => {
             req.session.usuario.id
         ],
         (erro) => {
-
             if (erro) {
                 console.log(erro);
                 return res.send('Erro ao cadastrar palestra.');
             }
-
             res.redirect('/admin');
-
         }
     );
-
 });
 
-
 app.get('/admin/palestras/editar/:id', verificarAdmin, (req, res) => {
-
     const id = req.params.id;
-
     const sql = `
         SELECT *,
         DATE_FORMAT(data_hora, '%Y-%m-%dT%H:%i') AS data_hora_input
         FROM palestras
         WHERE id = ?
     `;
-
     connection.query(sql, [id], (erro, resultado) => {
-
         if (erro) {
             console.log(erro);
             return res.send('Erro ao buscar palestra.');
         }
-
         if (resultado.length === 0) {
             return res.send('Palestra não encontrada.');
         }
-
         const palestra = resultado[0];
-
         connection.query('SELECT * FROM salas', (erro, salas) => {
-
             if (erro) {
                 console.log(erro);
                 return res.send('Erro ao buscar salas.');
             }
-
             res.render('editarPalestra', {
                 palestra: palestra,
                 salas: salas
             });
-
         });
-
     });
-
 });
-
 
 app.post('/admin/palestras/editar/:id', verificarAdmin, (req, res) => {
 
     const id = req.params.id;
-
     const {
         titulo_palestra,
         descricao,
@@ -304,7 +265,6 @@ app.post('/admin/palestras/editar/:id', verificarAdmin, (req, res) => {
     } = req.body;
 
     const dataFormatada = data_hora.replace('T', ' ') + ':00';
-
     const sql = `
         UPDATE palestras
         SET titulo_palestra = ?,
@@ -314,7 +274,6 @@ app.post('/admin/palestras/editar/:id', verificarAdmin, (req, res) => {
             id_sala = ?
         WHERE id = ?
     `;
-
     connection.query(
         sql,
         [
@@ -326,26 +285,19 @@ app.post('/admin/palestras/editar/:id', verificarAdmin, (req, res) => {
             id
         ],
         (erro) => {
-
             if (erro) {
                 console.log(erro);
                 return res.send('Erro ao atualizar palestra.');
             }
-
             res.redirect('/admin');
-
         }
     );
-
 });
-
 
 app.post('/admin/palestras/excluir/:id', verificarAdmin, (req, res) => {
 
     const id = req.params.id;
-
     const sql = 'DELETE FROM palestras WHERE id = ?';
-
     connection.query(sql, [id], (erro) => {
 
         if (erro) {
@@ -354,9 +306,7 @@ app.post('/admin/palestras/excluir/:id', verificarAdmin, (req, res) => {
         }
 
         res.redirect('/admin');
-
     });
-
 });
 
 app.get('/cadastro', (req, res) => {
@@ -364,54 +314,32 @@ app.get('/cadastro', (req, res) => {
 });
 
 app.post('/cadastro', async (req, res) => {
-
     const { nome, email, senha } = req.body;
-
     if (!nome || !email || !senha) {
         return res.send('Preencha todos os campos!');
     }
 
     try {
-
         const senhaCriptografada = await bcrypt.hash(senha, 10);
-
         const sql = `
             INSERT INTO usuarios (nome, email, senha, tipo)
             VALUES (?, ?, ?, 'usuario')
         `;
 
-        connection.query(
-            sql,
-            [nome, email, senhaCriptografada],
-            (erro) => {
-
-                if (erro) {
-
-                    if (erro.code === 'ER_DUP_ENTRY') {
-                        return res.send('Este e-mail já está cadastrado!');
-                    }
-
-                    console.log(erro);
-                    return res.send('Erro ao realizar cadastro.');
-
-                }
-
-                res.redirect('/login?cadastro=sucesso');
-
+        connection.query(sql, [nome, email, senhaCriptografada], (erro) => {
+            if (erro) {
+                console.log(erro);
+                return res.send('Erro ao cadastrar usuário. Verifique se o e-mail já existe.');
             }
-        );
-
+            res.redirect('/login?cadastro=sucesso');
+        });
     } catch (erro) {
         console.log(erro);
-        res.send('Erro ao criptografar a senha.');
+        res.send('Erro interno ao processar cadastro.');
     }
-
 });
 
-
-
 app.post('/favoritos/:id', (req, res) => {
-
     if (!req.session.usuario) {
         return res.redirect('/login');
     }
@@ -419,74 +347,36 @@ app.post('/favoritos/:id', (req, res) => {
     const usuarioId = req.session.usuario.id;
     const palestraId = req.params.id;
 
-    const sql = `
-        SELECT id FROM favoritos
-        WHERE usuario_id = ? AND palestra_id = ?
-    `;
+    const sqlVerificar = 'SELECT * FROM favoritos WHERE usuario_id = ? AND palestra_id = ?';
 
-    connection.query(sql, [usuarioId, palestraId], (erro, resultado) => {
-
+    connection.query(sqlVerificar, [usuarioId, palestraId], (erro, resultado) => {
         if (erro) {
             console.log(erro);
-            return res.send('Erro ao verificar favorito.');
+            return res.send('Erro ao verificar favoritos.');
         }
 
         if (resultado.length > 0) {
-
-            connection.query(
-                'DELETE FROM favoritos WHERE usuario_id = ? AND palestra_id = ?',
-                [usuarioId, palestraId],
-                (erro) => {
-
-                    if (erro) {
-                        console.log(erro);
-                        return res.send('Erro ao remover favorito.');
-                    }
-
-                    res.redirect('/palestras');
-
-                }
-            );
-
+            const sqlRemover = 'DELETE FROM favoritos WHERE usuario_id = ? AND palestra_id = ?';
+            connection.query(sqlRemover, [usuarioId, palestraId], (erro) => {
+                if (erro) console.log(erro);
+                res.redirect('/palestras');
+            });
         } else {
-
-            connection.query(
-                'INSERT INTO favoritos (usuario_id, palestra_id) VALUES (?, ?)',
-                [usuarioId, palestraId],
-                (erro) => {
-
-                    if (erro) {
-                        console.log(erro);
-                        return res.send('Erro ao adicionar favorito.');
-                    }
-
-                    res.redirect('/palestras');
-
-                }
-            );
-
+            const sqlAdicionar = 'INSERT INTO favoritos (usuario_id, palestra_id) VALUES (?, ?)';
+            connection.query(sqlAdicionar, [usuarioId, palestraId], (erro) => {
+                if (erro) console.log(erro);
+                res.redirect('/palestras');
+            });
         }
-
     });
-
 });
-
 
 app.get('/logout', (req, res) => {
-
-    req.session.destroy((erro) => {
-
-        if (erro) {
-            return res.send('Erro ao sair da conta.');
-        }
-
-        res.redirect('/login');
-
-    });
-
+    req.session.destroy();
+    res.redirect('/login');
 });
-
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Servidor rodando em http://localhost:${port}`);
 });
+
